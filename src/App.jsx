@@ -45,6 +45,32 @@ export default function Tracker() {
     setTimeout(() => setSaving(false), 800);
   }
 
+  function exportBackup() {
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `tracker-backup-${todayKey()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importBackup(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const parsed = JSON.parse(ev.target.result);
+        setData(parsed);
+        localStorage.setItem("tracker-data", JSON.stringify(parsed));
+        alert("✓ Backup restaurado");
+      } catch { alert("Error al leer el archivo"); }
+    };
+    reader.readAsText(file);
+  }
+
   function togglePillar(dayKey, pillarId) {
     const dayData = data[dayKey] || { pillars: {}, note: "" };
     const newPillars = { ...dayData.pillars, [pillarId]: !dayData.pillars[pillarId] };
@@ -82,7 +108,7 @@ export default function Tracker() {
   return (
     <div style={{ minHeight: "100vh", background: "#F7F7F5", fontFamily: "'DM Sans', 'Helvetica Neue', sans-serif", color: "#1A1A1A" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Syne:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Outfit:wght@700;800;900&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         .pillar-card {
@@ -127,7 +153,7 @@ export default function Tracker() {
           Regreso al Yo
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 22 }}>
-          <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 46, fontWeight: 800, lineHeight: 1 }}>
+          <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 46, fontWeight: 800, lineHeight: 1 }}>
             Mi<br />
             <span style={{ background: "linear-gradient(120deg, #E8896A 0%, #F5C842 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               progreso
@@ -141,15 +167,15 @@ export default function Tracker() {
         {/* Stat cards */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
           <div style={{ background: "linear-gradient(135deg, #1A1A1A 0%, #3C3C3C 100%)", borderRadius: 18, padding: "16px 14px" }}>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 34, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{activeDays}</div>
+            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 34, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{activeDays}</div>
             <div style={{ fontSize: 10, color: "#888", marginTop: 5, fontWeight: 600 }}>activos</div>
           </div>
           <div style={{ background: "linear-gradient(135deg, #F5C842 0%, #F0A500 100%)", borderRadius: 18, padding: "16px 14px" }}>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 34, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{perfectDays}</div>
+            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 34, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{perfectDays}</div>
             <div style={{ fontSize: 10, color: "rgba(255,255,255,0.75)", marginTop: 5, fontWeight: 600 }}>completos</div>
           </div>
           <div style={{ background: "linear-gradient(135deg, #B8A9E8 0%, #8B7EC8 100%)", borderRadius: 18, padding: "16px 14px" }}>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 34, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{consistencia}%</div>
+            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 34, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{consistencia}%</div>
             <div style={{ fontSize: 10, color: "rgba(255,255,255,0.75)", marginTop: 5, fontWeight: 600 }}>racha</div>
           </div>
         </div>
@@ -168,7 +194,7 @@ export default function Tracker() {
             <div style={{ fontSize: 11, fontWeight: 700, color: "#AEAEAD", letterSpacing: 2, textTransform: "uppercase", marginBottom: 6 }}>
               {selectedDay === today ? "Hoy" : selectedDay}
             </div>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 30, fontWeight: 800, lineHeight: 1.15, whiteSpace: "pre-line" }}>
+            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 30, fontWeight: 800, lineHeight: 1.15, whiteSpace: "pre-line" }}>
               {scoreMessages[selectedScore]}
             </div>
           </div>
@@ -202,7 +228,7 @@ export default function Tracker() {
                 >
                   <span style={{ fontSize: 34, display: "block", marginBottom: 10, opacity: active ? 1 : 0.3 }}>{p.icon}</span>
                   <div style={{
-                    fontFamily: "'Syne', sans-serif",
+                    fontFamily: "'Outfit', sans-serif",
                     fontSize: 22,
                     fontWeight: 800,
                     color: active ? "#fff" : "#AEAEAD",
@@ -240,7 +266,7 @@ export default function Tracker() {
             <button className="nav-btn" onClick={() => {
               if (viewMonth === 0) { setViewMonth(11); setViewYear(y => y-1); } else setViewMonth(m => m-1);
             }}>←</button>
-            <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 22, fontWeight: 800 }}>
+            <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 800 }}>
               {MONTHS[viewMonth]} {viewYear}
             </div>
             <button className="nav-btn" onClick={() => {
@@ -310,12 +336,37 @@ export default function Tracker() {
                   <div key={p.id} style={{ background: p.grad, borderRadius: 16, padding: "14px 16px", display: "flex", alignItems: "center", gap: 10 }}>
                     <span style={{ fontSize: 24 }}>{p.icon}</span>
                     <div>
-                      <div style={{ fontFamily: "'Syne', sans-serif", fontSize: 22, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{count}×</div>
+                      <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 22, fontWeight: 800, color: "#fff", lineHeight: 1 }}>{count}×</div>
                       <div style={{ fontSize: 11, color: "rgba(255,255,255,0.75)", fontWeight: 600, marginTop: 2 }}>{p.label}</div>
                     </div>
                   </div>
                 );
               })}
+            </div>
+          </div>
+
+          {/* Backup */}
+          <div style={{ marginTop: 32, paddingTop: 24, borderTop: "1.5px solid #F0EFED" }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: "#AEAEAD", letterSpacing: 2, textTransform: "uppercase", marginBottom: 14 }}>
+              Mis datos
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <button
+                onClick={exportBackup}
+                style={{ background: "linear-gradient(135deg,#1A1A1A,#3C3C3C)", border: "none", borderRadius: 16, padding: "16px 14px", cursor: "pointer", textAlign: "left" }}
+              >
+                <div style={{ fontSize: 22, marginBottom: 6 }}>💾</div>
+                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 800, color: "#fff", lineHeight: 1 }}>Exportar</div>
+                <div style={{ fontSize: 10, color: "rgba(255,255,255,0.6)", marginTop: 4, fontWeight: 600 }}>backup .json</div>
+              </button>
+              <label
+                style={{ background: "#EEECEA", border: "none", borderRadius: 16, padding: "16px 14px", cursor: "pointer", textAlign: "left", display: "block" }}
+              >
+                <div style={{ fontSize: 22, marginBottom: 6 }}>📂</div>
+                <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: 16, fontWeight: 800, color: "#1A1A1A", lineHeight: 1 }}>Restaurar</div>
+                <div style={{ fontSize: 10, color: "#AEAEAD", marginTop: 4, fontWeight: 600 }}>subir backup</div>
+                <input type="file" accept=".json" onChange={importBackup} style={{ display: "none" }} />
+              </label>
             </div>
           </div>
         </div>
