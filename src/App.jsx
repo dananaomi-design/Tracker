@@ -66,96 +66,83 @@ const HABITS = [
 
 const ROUTINE = [
   {
-    block: "Lunes", tag: "Tren inferior + Core", duration: "60 min", color: "#EAEAEA",
+    block: "Tren Inferior + Core", tag: "Cadena posterior · Glúteo · Core profundo",
+    duration: "60 min", color: "#EAEAEA",
+    img: "/img-tren-inferior-core.png",
     focus: "El mayor músculo está en las piernas. Activarlo redistribuye la grasa y acelera el metabolismo.",
     exercises: [
-      { name: "Romanian Deadlift",         detail: "Mancuernas · 4 × 12",  target: "Cadena posterior",
-        img: "https://muscles.wiki/gif/romanian-deadlift.gif" },
-      { name: "Sumo Squat (tempo 3-1-1)",  detail: "Mancuerna · 4 × 15",   target: "Glúteo y aductor",
-        img: "https://muscles.wiki/gif/sumo-squat.gif" },
-      { name: "Hip Thrust unilateral",     detail: "Con banda · 3 × 15 c/lado", target: "Glúteo mayor",
-        img: "https://muscles.wiki/gif/hip-thrust.gif" },
-      { name: "Step-up lateral",           detail: "Mancuerna · 3 × 12",   target: "Estabilidad y glúteo",
-        img: "https://muscles.wiki/gif/step-up.gif" },
-      { name: "Dead Bug",                  detail: "3 × 10 lentos",         target: "Core profundo",
-        img: "https://muscles.wiki/gif/dead-bug.gif" },
-      { name: "Pallof Press",              detail: "Banda · 3 × 12",        target: "Anti-rotación",
-        img: "https://muscles.wiki/gif/pallof-press.gif" },
+      { name: "Romanian Deadlift",        detail: "Mancuernas · 4 × 12",           target: "Cadena posterior" },
+      { name: "Sumo Squat (tempo 3-1-1)", detail: "Mancuerna · 4 × 15",            target: "Glúteo y aductor" },
+      { name: "Hip Thrust unilateral",    detail: "Con banda · 3 × 15 c/lado",     target: "Glúteo mayor" },
+      { name: "Step-up lateral",          detail: "Mancuerna · 3 × 12",            target: "Estabilidad y glúteo" },
+      { name: "Dead Bug",                 detail: "3 × 10 lentos",                  target: "Core profundo" },
+      { name: "Pallof Press",             detail: "Banda · 3 × 12",                target: "Anti-rotación" },
     ],
   },
   {
-    block: "Martes", tag: "Espalda media + Postura", duration: "55 min", color: "#C4FC7B",
+    block: "Espalda + Postura", tag: "Romboides · Trapecio medio · Dorsal",
+    duration: "55 min", color: "#C4FC7B",
+    img: "/img-espalda-postura.png",
     focus: "Activar romboides y trapecio medio abre el pecho, alarga el cuello y mejora la postura desde la raíz.",
     exercises: [
-      { name: "Remo en pronación",         detail: "Mancuernas · 4 × 15 · codos abiertos", target: "Romboides",
-        img: "https://muscles.wiki/gif/bent-over-row.gif" },
-      { name: "Face Pull",                 detail: "Banda · 4 × 20 · codos altos",          target: "Trapecio medio",
-        img: "https://muscles.wiki/gif/face-pull.gif" },
-      { name: "Pull-apart con banda",      detail: "3 × 20 · lento y consciente",            target: "Retracción",
-        img: "https://muscles.wiki/gif/band-pull-apart.gif" },
-      { name: "Remo 1 brazo apoyado",      detail: "3 × 15 · codo cerca del cuerpo",         target: "Dorsal",
-        img: "https://muscles.wiki/gif/one-arm-row.gif" },
-      { name: "Superman / extensión suelo",detail: "3 × 12",                                 target: "Erector espinal",
-        img: "https://muscles.wiki/gif/superman.gif" },
-      { name: "Apertura de pecho c/banda", detail: "2 × 30 seg · wall stretch",              target: "Liberación pectoral",
-        img: "https://muscles.wiki/gif/chest-stretch.gif" },
+      { name: "Remo en pronación",          detail: "Mancuernas · 4 × 15 · codos abiertos", target: "Romboides" },
+      { name: "Face Pull",                  detail: "Banda · 4 × 20 · codos altos",          target: "Trapecio medio" },
+      { name: "Pull-apart con banda",       detail: "3 × 20 · lento y consciente",            target: "Retracción" },
+      { name: "Remo 1 brazo apoyado",       detail: "3 × 15 · codo cerca del cuerpo",         target: "Dorsal" },
+      { name: "Superman / extensión suelo", detail: "3 × 12",                                 target: "Erector espinal" },
+      { name: "Apertura de pecho c/banda",  detail: "2 × 30 seg · wall stretch",              target: "Liberación pectoral" },
     ],
   },
   {
-    block: "Miércoles", tag: "Cardio + Sauna", duration: "60 min", color: "#EAEAEA",
+    block: "Cardio + Sauna", tag: "LISS · HIIT · Recuperación",
+    duration: "60 min", color: "#EAEAEA",
     focus: "Cardio LISS o HIIT moderado. El sauna reduce cortisol hasta un 23% post-ejercicio.",
     exercises: [
-      { name: "Opción A: Elíptica o bici",  detail: "35–40 min · Zona 2",                    target: "LISS" },
-      { name: "Opción B: HIIT",             detail: "30s intenso / 90s suave × 8–10 series", target: "HIIT" },
-      { name: "Sauna seco",                 detail: "15–20 min post-cardio",                  target: "Recuperación" },
+      { name: "Opción A: Elíptica o bici", detail: "35–40 min · Zona 2",                    target: "LISS" },
+      { name: "Opción B: HIIT",            detail: "30s intenso / 90s suave × 8–10 series", target: "HIIT" },
+      { name: "Sauna seco",                detail: "15–20 min post-cardio",                  target: "Recuperación" },
     ],
   },
   {
-    block: "Jueves", tag: "Tren inferior · Énfasis glúteo", duration: "60 min", color: "#EAEAEA",
+    block: "Tren Inferior · Glúteo", tag: "Cuádriceps · Glúteo medio · Isquiotibiales",
+    duration: "60 min", color: "#EAEAEA",
+    img: "/img-tren-inferior-gluteo.png",
     focus: "Segunda sesión de piernas. Crear volumen abajo redistribuye visualmente la proporción del cuerpo.",
     exercises: [
-      { name: "Bulgarian Split Squat",      detail: "Mancuernas · 4 × 10",    target: "Cuádriceps y glúteo",
-        img: "https://muscles.wiki/gif/bulgarian-split-squat.gif" },
-      { name: "Good Morning",               detail: "Banda · 3 × 15",          target: "Isquio y glúteo",
-        img: "https://muscles.wiki/gif/good-morning.gif" },
-      { name: "Abducción lateral de cadera",detail: "Banda · 3 × 20",          target: "Glúteo medio",
-        img: "https://muscles.wiki/gif/hip-abduction.gif" },
-      { name: "Zancada reverse",            detail: "Mancuerna · 3 × 12",      target: "Equilibrio y glúteo",
-        img: "https://muscles.wiki/gif/reverse-lunge.gif" },
-      { name: "Plancha lateral + apertura", detail: "3 × 10",                  target: "Oblicuos",
-        img: "https://muscles.wiki/gif/side-plank.gif" },
-      { name: "Bird-Dog",                   detail: "3 × 10 · extensión lenta", target: "Lumbar",
-        img: "https://muscles.wiki/gif/bird-dog.gif" },
+      { name: "Bulgarian Split Squat",       detail: "Mancuernas · 4 × 10",      target: "Cuádriceps y glúteo" },
+      { name: "Good Morning",                detail: "Banda · 3 × 15",            target: "Isquio y glúteo" },
+      { name: "Abducción lateral de cadera", detail: "Banda · 3 × 20",            target: "Glúteo medio" },
+      { name: "Zancada reverse",             detail: "Mancuerna · 3 × 12",        target: "Equilibrio y glúteo" },
+      { name: "Plancha lateral + apertura",  detail: "3 × 10",                    target: "Oblicuos" },
+      { name: "Bird-Dog",                    detail: "3 × 10 · extensión lenta",  target: "Lumbar" },
     ],
   },
   {
-    block: "Viernes", tag: "Hombros + Brazos estilizantes", duration: "50 min", color: "#C4FC7B",
+    block: "Hombros + Brazos", tag: "Deltoides · Bíceps · Tríceps",
+    duration: "50 min", color: "#C4FC7B",
+    img: "/img-hombros-brazos.png",
     focus: "No buscamos volumen. Buscamos definición en deltoides posterior y lateral — hombros estrechos, cuello largo.",
     exercises: [
-      { name: "Elevación lateral (inclinada 30°)", detail: "Carga baja · 4 × 20",    target: "Deltoides medio",
-        img: "https://muscles.wiki/gif/lateral-raise.gif" },
-      { name: "Vuelos posteriores (pájaro)",       detail: "Mancuernas · 4 × 20",    target: "Deltoides posterior",
-        img: "https://muscles.wiki/gif/rear-delt-fly.gif" },
-      { name: "Press Arnold muy ligero",           detail: "3 × 18 reps",             target: "Cabeza anterior/media",
-        img: "https://muscles.wiki/gif/arnold-press.gif" },
-      { name: "Curl martillo con banda",           detail: "3 × 15",                  target: "Bíceps braquial",
-        img: "https://muscles.wiki/gif/hammer-curl.gif" },
-      { name: "Extensión tríceps sobre cabeza",    detail: "Banda · 3 × 15",          target: "Cabeza larga",
-        img: "https://muscles.wiki/gif/overhead-tricep-extension.gif" },
-      { name: "Remo al mentón (agarre ancho)",     detail: "Banda · 3 × 15",          target: "Deltoides lateral",
-        img: "https://muscles.wiki/gif/upright-row.gif" },
+      { name: "Elevación lateral (inclinada 30°)", detail: "Carga baja · 4 × 20", target: "Deltoides medio" },
+      { name: "Vuelos posteriores (pájaro)",       detail: "Mancuernas · 4 × 20", target: "Deltoides posterior" },
+      { name: "Press Arnold muy ligero",           detail: "3 × 18 reps",          target: "Cabeza anterior/media" },
+      { name: "Curl martillo con banda",           detail: "3 × 15",               target: "Bíceps braquial" },
+      { name: "Extensión tríceps sobre cabeza",    detail: "Banda · 3 × 15",       target: "Cabeza larga" },
+      { name: "Remo al mentón (agarre ancho)",     detail: "Banda · 3 × 15",       target: "Deltoides lateral" },
     ],
   },
   {
-    block: "Sábado", tag: "Cardio + Sauna", duration: "60 min", color: "#EAEAEA",
-    focus: "Varía el cardio respecto al miércoles. El sauna post-cardio tiene beneficio adicional en síntesis proteica.",
+    block: "Cardio + Sauna", tag: "Alternar con sesión anterior",
+    duration: "60 min", color: "#EAEAEA",
+    focus: "Varía el cardio respecto a la sesión anterior. El sauna post-cardio tiene beneficio adicional en síntesis proteica.",
     exercises: [
-      { name: "Cardio alternado al miércoles", detail: "Si hiciste LISS → HIIT, y viceversa", target: "Adaptación" },
-      { name: "Sauna seco",                    detail: "15–20 min · hidratación previa",       target: "Recuperación" },
+      { name: "Cardio alternado", detail: "Si hiciste LISS → HIIT, y viceversa", target: "Adaptación" },
+      { name: "Sauna seco",       detail: "15–20 min · hidratación previa",       target: "Recuperación" },
     ],
   },
   {
-    block: "Domingo", tag: "Descanso activo", duration: "30–45 min", color: "#EAEAEA",
+    block: "Descanso activo", tag: "Movilidad · Recuperación",
+    duration: "30–45 min", color: "#EAEAEA",
     focus: "El músculo crece en el descanso, no durante el entrenamiento.",
     exercises: [
       { name: "Caminata, yoga o movilidad", detail: "30–45 min suave", target: "Recuperación" },
@@ -361,51 +348,62 @@ function HomeTab({ isHabitDone, tasks, setTab, completedToday, suppLog, postLog 
 // ─── RUTINA ──────────────────────────────────────────────────────────────────
 function RutinaTab() {
   const [open, setOpen] = useState(null);
+  const [imgModal, setImgModal] = useState(null);
+
   return (
     <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+
+      {/* IMAGE MODAL */}
+      {imgModal && (
+        <div onClick={() => setImgModal(null)} style={{
+          position:"fixed", inset:0, background:"rgba(0,0,0,0.92)", zIndex:999,
+          display:"flex", alignItems:"center", justifyContent:"center", padding:16
+        }}>
+          <img src={imgModal} alt="ejercicios"
+            style={{ maxWidth:"100%", maxHeight:"90vh", borderRadius:12, display:"block" }} />
+          <div style={{ position:"absolute", top:20, right:20, color:"#fff", fontSize:28, cursor:"pointer" }}>✕</div>
+        </div>
+      )}
+
       <div style={{ marginBottom:4 }}>
         <div style={{ fontSize:11, fontWeight:400, color:G.muted, letterSpacing:2, textTransform:"uppercase" }}>Programa completo · 12 semanas</div>
         <div style={{ fontSize:28, fontWeight:700, color:G.ink, lineHeight:1.1, marginTop:2 }}>Rutina</div>
-        <div style={{ fontSize:13, color:G.muted, marginTop:4 }}>4 días fuerza · 2 cardio + sauna · 1 descanso activo</div>
+        <div style={{ fontSize:13, color:G.muted, marginTop:4 }}>4 bloques de fuerza · 2 cardio + sauna · 1 descanso activo</div>
       </div>
 
       {ROUTINE.map((block, bi) => (
         <div key={bi} style={{ background: block.color, borderRadius:16, padding:"16px 16px 10px" }}>
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:6 }}>
-            <div>
+            <div style={{ flex:1 }}>
               <div style={{ fontSize:9, fontWeight:400, color:G.muted, letterSpacing:2, textTransform:"uppercase", marginBottom:2 }}>{block.tag}</div>
               <div style={{ fontSize:18, fontWeight:700, color:G.ink }}>{block.block}</div>
             </div>
-            <div style={{ fontSize:10, color:G.muted, background:"rgba(0,0,0,0.07)", borderRadius:6, padding:"3px 8px", whiteSpace:"nowrap" }}>{block.duration}</div>
+            <div style={{ display:"flex", alignItems:"center", gap:8 }}>
+              {block.img && (
+                <button onClick={() => setImgModal(block.img)}
+                  style={{ border:"1.5px solid rgba(0,0,0,0.15)", background:"rgba(255,255,255,0.7)", borderRadius:8, padding:"4px 10px", cursor:"pointer", display:"flex", alignItems:"center", gap:5 }}>
+                  <Icon name="eye" size={14} color={G.purple} strokeWidth={2} />
+                  <span style={{ fontSize:10, fontWeight:600, color:G.purple }}>Ver</span>
+                </button>
+              )}
+              <div style={{ fontSize:10, color:G.muted, background:"rgba(0,0,0,0.07)", borderRadius:6, padding:"3px 8px", whiteSpace:"nowrap" }}>{block.duration}</div>
+            </div>
           </div>
           <div style={{ fontSize:12, color:G.muted, lineHeight:1.5, marginBottom:10, fontStyle:"italic" }}>{block.focus}</div>
           {block.exercises.map((ex, ei) => {
             const key = `${bi}-${ei}`;
             const isOpen = open === key;
             return (
-              <div key={ei} style={{ borderTop:`1px solid rgba(0,0,0,0.08)`, padding:"9px 0" }}>
+              <div key={ei} style={{ borderTop:"1px solid rgba(0,0,0,0.08)", padding:"9px 0" }}>
                 <div style={{ display:"flex", alignItems:"center", gap:8 }}>
                   <span onClick={() => setOpen(isOpen ? null : key)}
                     style={{ fontSize:13, fontWeight:600, color:G.ink, flex:1, cursor:"pointer" }}>{ex.name}</span>
                   {ex.target && (
                     <span style={{ fontSize:9, fontWeight:600, color:G.purple, background:"rgba(172,77,226,0.1)", borderRadius:5, padding:"2px 7px", letterSpacing:0.5, textTransform:"uppercase" }}>{ex.target}</span>
                   )}
-                  {ex.img && (
-                    <button onClick={() => setOpen(isOpen ? null : key)}
-                      style={{ border:"none", background:"transparent", cursor:"pointer", padding:4, flexShrink:0 }}>
-                      <Icon name="eye" size={16} color={isOpen ? G.purple : G.dim} strokeWidth={1.8} />
-                    </button>
-                  )}
                 </div>
                 {isOpen && (
-                  <div style={{ marginTop:8 }}>
-                    {ex.img && (
-                      <img src={ex.img} alt={ex.name}
-                        onError={e => { e.target.style.display="none"; }}
-                        style={{ width:"100%", borderRadius:10, marginBottom:8, display:"block", background:"#f0f0f0" }} />
-                    )}
-                    <div style={{ fontSize:12, color:G.muted, lineHeight:1.5 }}>{ex.detail}</div>
-                  </div>
+                  <div style={{ fontSize:12, color:G.muted, marginTop:6, lineHeight:1.5 }}>{ex.detail}</div>
                 )}
               </div>
             );
@@ -442,7 +440,6 @@ function RutinaTab() {
   );
 }
 
-// ─── HÁBITOS ─────────────────────────────────────────────────────────────────
 function HabitosTab({ isHabitDone, toggleHabit }) {
   const weekTotal = HABITS.length * 7;
   const weekDone  = HABITS.reduce((acc, h) => acc + DAYS.reduce((a,_,di) => a+(isHabitDone(h.id,di)?1:0),0), 0);
@@ -601,6 +598,7 @@ const POSTURE_ACTIVATE = [
 function CuerpoTab({ suppLog, setSuppLog, postLog, setPostLog }) {
   const [openSupp, setOpenSupp] = useState(null);
   const [openPost, setOpenPost] = useState(null);
+  const [imgModal, setImgModal] = useState(null);
   const [showImg, setShowImg] = useState(null); // key for image overlay
 
   const todayKey = () => new Date().toISOString().slice(0, 10);
@@ -678,7 +676,14 @@ function CuerpoTab({ suppLog, setSuppLog, postLog, setPostLog }) {
       {/* POSTURA */}
       <div style={{ marginTop:8, marginBottom:4 }}>
         <div style={{ fontSize:11, fontWeight:400, color:G.muted, letterSpacing:2, textTransform:"uppercase" }}>Liberar + activar · cada día</div>
-        <div style={{ fontSize:28, fontWeight:700, color:G.ink, lineHeight:1.1, marginTop:2 }}>Postura</div>
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginTop:2 }}>
+          <div style={{ fontSize:28, fontWeight:700, color:G.ink, lineHeight:1.1 }}>Postura</div>
+          <button onClick={() => setImgModal("/img-postura.png")}
+            style={{ border:`1.5px solid ${G.border}`, background:G.surface, borderRadius:8, padding:"5px 12px", cursor:"pointer", display:"flex", alignItems:"center", gap:5 }}>
+            <Icon name="eye" size={14} color={G.purple} strokeWidth={2} />
+            <span style={{ fontSize:10, fontWeight:600, color:G.purple }}>Ver guía</span>
+          </button>
+        </div>
         <div style={{ fontSize:13, color:G.muted, marginTop:4 }}>Libera lo hipertónico, activa lo inhibido. El orden importa.</div>
       </div>
 
@@ -832,7 +837,7 @@ export default function App() {
         </header>
 
         {/* CONTENT */}
-        <main style={{ flex:1, overflowY:"auto", padding:"16px 14px 32px" }}>
+        <main style={{ flex:1, overflowY:"auto", padding:"36px 16px 40px" }}>
           {tab==="home"       && <HomeTab       isHabitDone={isHabitDone} tasks={tasks} setTab={setTab} completedToday={completedToday} suppLog={suppLog} postLog={postLog} />}
           {tab==="rutina"     && <RutinaTab />}
           {tab==="habitos"    && <HabitosTab    isHabitDone={isHabitDone} toggleHabit={toggleHabit} />}
