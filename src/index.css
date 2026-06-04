@@ -1,0 +1,22 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F2EFE9;
+  --surface: #ECEAE3;
+  --white: #FFFFFF;
+  --ink: #111111;
+  --ink-muted: #888880;
+  --accent: #E8FF47;
+  --accent-dark: #C8DF00;
+  --accent2: #B8A9FF;
+  --accent3: #FF8FA3;
+  --accent4: #7DDFB8;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+
+html, body { background: var(--bg); color: var(--ink); font-family: var(--font-body); }
+
+button { font-family: var(--font-body); cursor: pointer; }
+
+::-webkit-scrollbar { width: 0; }

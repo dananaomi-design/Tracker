@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutina de Transformación · Dana</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple:     #AC4DE2;
+    --purple-dark:#8B3AB8;
+    --purple-pale:#F3E8FD;
+    --lime:       #C8F51F;
+    --lime-card:  #C4FC7B;
+    --lime-pale:  #F0FDE4;
+    --ink:        #0A0A0A;
+    --white:      #FFFFFF;
+    --surface:    #F5F5F5;
+    --mid:        #555555;
+    --muted:      #888888;
+    --border:     #E8E8E8;
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--white); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 400; line-height: 1.6; }
+
+  /* HERO */
+  .hero {
+    background: var(--purple);
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 80px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,245,31,0.2) 0%, transparent 70%);
+  }
+  .hero-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 24px;
+    opacity: 0; animation: fadeUp .8s ease forwards .2s;
+  }
+  .hero h1 {
+    font-size: clamp(56px, 9vw, 108px); font-weight: 700;
+    color: var(--white); line-height: 1; margin-bottom: 24px;
+    opacity: 0; animation: fadeUp .8s ease forwards .4s;
+  }
+  .hero h1 em { font-style: normal; color: var(--lime); }
+  .hero-sub {
+    font-size: 16px; color: rgba(255,255,255,0.65); max-width: 520px;
+    margin-bottom: 56px; line-height: 1.8;
+    opacity: 0; animation: fadeUp .8s ease forwards .6s;
+  }
+  .hero-stats {
+    display: flex; gap: 48px; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp .8s ease forwards .8s;
+  }
+  .stat-num { font-size: 42px; font-weight: 700; color: var(--lime); line-height: 1; }
+  .stat-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+  /* LAYOUT */
+  .section { padding: 80px 60px; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--purple); margin-bottom: 14px; }
+  h2 { font-size: clamp(34px, 5vw, 56px); font-weight: 700; line-height: 1.05; margin-bottom: 28px; }
+  h2 em { font-style: normal; color: var(--purple); }
+  .lead { font-size: 16px; line-height: 1.9; color: var(--mid); max-width: 680px; margin-bottom: 48px; }
+
+  /* THEORY GRID */
+  .theory-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; background: var(--border); margin-bottom: 60px; }
+  .theory-card { background: var(--white); padding: 40px; transition: background .25s; }
+  .theory-card:hover { background: var(--purple-pale); }
+  .theory-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--ink); }
+  .theory-card p { font-size: 14px; line-height: 1.8; color: var(--mid); }
+  .theory-icon { font-size: 24px; margin-bottom: 14px; }
+
+  /* WEEK SECTION */
+  .week-section { background: var(--ink); padding: 80px 60px; }
+  .week-inner { max-width: 1100px; margin: 0 auto; }
+  .week-section h2 { color: var(--white); }
+  .week-section h2 em { color: var(--lime); }
+  .week-section .section-label { color: rgba(200,245,31,0.6); }
+  .week-section .lead { color: #888; }
+
+  .days-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; background: rgba(200,245,31,0.15); margin-top: 40px; }
+  .day-card { background: #111; padding: 36px; position: relative; overflow: hidden; transition: background .25s; }
+  .day-card:hover { background: #1A1A1A; }
+  .day-card.cardio { background: #0D0D0D; }
+  .day-card.rest-day { background: #0A0A0A; grid-column: 1 / -1; }
+  .day-number {
+    font-size: 80px; font-weight: 700; color: rgba(200,245,31,0.06);
+    position: absolute; top: 8px; right: 16px; line-height: 1;
+  }
+  .day-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--lime); margin-bottom: 10px; opacity: .7; }
+  .day-card h3 { font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+  .day-focus { font-size: 13px; color: #666; line-height: 1.7; margin-bottom: 18px; }
+  .ex-list { list-style: none; }
+  .ex-list li { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 13px; }
+  .ex-list li:last-child { border-bottom: none; }
+  .ex-name { color: #DDD; font-weight: 500; }
+  .ex-sets { color: var(--lime); font-size: 11px; text-align: right; white-space: nowrap; margin-top: 2px; opacity: .8; }
+
+  /* POSTURE */
+  .posture-section { background: var(--lime-card); padding: 80px 60px; }
+  .posture-inner { max-width: 1100px; margin: 0 auto; }
+  .posture-section h2 em { color: var(--purple); }
+  .posture-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 40px; }
+  .posture-col h3 { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 18px; }
+  .posture-item { background: var(--white); padding: 18px 22px; margin-bottom: 8px; border-left: 3px solid var(--purple); }
+  .posture-item h4 { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .posture-item p { font-size: 13px; color: var(--mid); line-height: 1.6; }
+
+  /* CARDIO */
+  .cardio-block { background: var(--ink); padding: 48px; margin-bottom: 56px; position: relative; overflow: hidden; }
+  .cardio-block::after { content: 'CARDIO'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%) rotate(90deg); font-size: 110px; font-weight: 700; color: rgba(200,245,31,0.03); letter-spacing: 8px; pointer-events: none; }
+  .cardio-block h3 { font-size: 28px; font-weight: 700; color: var(--white); margin-bottom: 14px; }
+  .cardio-block p { font-size: 14px; color: #777; line-height: 1.8; max-width: 600px; margin-bottom: 18px; }
+  .cardio-items { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+  .cardio-item { border-left: 2px solid var(--lime); padding-left: 16px; }
+  .cardio-item h4 { font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 6px; }
+  .cardio-item p { font-size: 12px; color: #666; margin-bottom: 0; line-height: 1.6; }
+
+  /* SUPPLEMENTS */
+  .supp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; background: var(--border); margin-top: 40px; }
+  .supp-card { background: var(--white); padding: 34px; }
+  .supp-priority { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; margin-bottom: 14px; font-weight: 600; }
+  .supp-priority.high { background: var(--purple); color: white; }
+  .supp-priority.med  { background: var(--lime-card); color: var(--ink); }
+  .supp-priority.opt  { background: var(--surface); color: var(--mid); }
+  .supp-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+  .supp-dose { font-size: 13px; color: var(--purple); font-weight: 600; margin-bottom: 10px; }
+  .supp-card p { font-size: 13px; color: var(--mid); line-height: 1.7; }
+
+  /* TIMELINE */
+  .timeline-section { background: var(--surface); padding: 80px 60px; }
+  .timeline-inner { max-width: 1100px; margin: 0 auto; }
+  .timeline { margin-top: 40px; }
+  .timeline-item { display: flex; gap: 28px; margin-bottom: 32px; align-items: flex-start; }
+  .timeline-phase { min-width: 90px; text-align: right; }
+  .timeline-phase span { font-size: 42px; font-weight: 700; color: var(--purple); line-height: 1; display: block; opacity: .25; }
+  .timeline-phase small { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--purple); }
+  .timeline-line { width: 2px; background: var(--purple); margin-top: 10px; min-height: 60px; flex-shrink: 0; opacity: .15; }
+  .timeline-content h4 { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 8px; margin-top: 6px; }
+  .timeline-content p { font-size: 13px; color: var(--mid); line-height: 1.7; }
+
+  /* FOOTER */
+  footer { background: var(--ink); padding: 60px; text-align: center; }
+  footer p { font-size: 20px; font-weight: 300; color: #555; max-width: 500px; margin: 0 auto; line-height: 1.7; }
+  footer p em { font-style: italic; color: var(--lime); }
+  footer small { display: block; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #333; margin-top: 24px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .hero, .section, .week-section, .posture-section, .cardio-block, .timeline-section { padding: 60px 24px; }
+    .theory-grid, .days-grid, .posture-cols, .supp-grid, .cardio-items { grid-template-columns: 1fr; }
+    .day-card.rest-day { grid-column: auto; }
+    .hero h1 { font-size: 52px; }
+    .hero-stats { gap: 28px; }
+    footer { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Programa personalizado · 4 días fuerza · 2 cardio + sauna · 12 semanas</div>
+  <h1>Volver<br>a <em>ti</em></h1>
+  <p class="hero-sub">Un programa diseñado para recuperar tu silueta original, corregir la postura postparto y devolverte la definición — sin inflar la parte superior.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">días fuerza</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">cardio + sauna</div></div>
+    <div class="stat"><div class="stat-num">12</div><div class="stat-label">semanas programa</div></div>
+    <div class="stat"><div class="stat-num">1</div><div class="stat-label">día descanso</div></div>
+  </div>
+</section>
+
+<!-- FUNDAMENTO -->
+<div class="section">
+  <div class="section-label">Por qué funciona</div>
+  <h2>El fundamento<br><em>teórico</em></h2>
+  <p class="lead">Tu cuerpo postparto tiene características muy concretas. El programa responde a cada una de ellas con estrategia, no con ejercicio genérico.</p>
+  <div class="theory-grid">
+    <div class="theory-card">
+      <div class="theory-icon">⚖️</div>
+      <h3>Grasa superior — cortisol y estrógeno</h3>
+      <p>La lactancia mantiene el cortisol elevado, favoreciendo acumulación en zona torácica, espalda y brazos. La solución no es cardio intenso (sube más el cortisol) sino fuerza moderada con énfasis en zona baja + déficit calórico moderado.</p>
+    </div>
+    <div class="theory-card">
+      <div class="theory-icon">🔄</div>
+      <h3>Postura cifótica — pectoral acortado</h3>
+      <p>La lactancia crea un patrón claro: pectoral mayor acortado, trapecio superior hipertónico, romboides inhibidos. El programa prioriza tracción horizontal con relación 2:1 (2 de espalda por cada 1 de pecho).</p>
+    </div>
+    <div class="theory-card">
+      <div class="theory-icon">📐</div>
+      <h3>Estilizar sin engrosar — fibras tipo I</h3>
+      <p>Para elongar y tonificar sin añadir volumen en la parte superior, trabajamos en rango de 12–20 repeticiones con cargas moderadas, activando fibras de resistencia. Esto da el efecto "bailarina" — músculo denso y definido, no hipertrofiado.</p>
+    </div>
+    <div class="theory-card">
+      <div class="theory-icon">🏗️</div>
+      <h3>Reconstruir la cintura — core transverso</h3>
+      <p>El embarazo desactiva el transverso. Sin un core funcional, la cintura pierde definición aunque pierdas grasa. Priorizamos activación profunda del core antes de cualquier ejercicio abdominal superficial.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SEMANA TIPO -->
+<div class="week-section">
+  <div class="week-inner">
+    <div class="section-label">Distribución semanal</div>
+    <h2>Tu semana<br><em>perfecta</em></h2>
+    <p class="lead">7 días con propósito. Cada sesión tiene un rol específico en tu transformación.</p>
+    <div class="days-grid">
+
+      <div class="day-card">
+        <div class="day-number">L</div>
+        <div class="day-tag">Lunes · Día 1</div>
+        <h3>Tren inferior + Core profundo</h3>
+        <p class="day-focus">El mayor músculo de tu cuerpo está en las piernas. Activarlo redistribuye la grasa y acelera el metabolismo.</p>
+        <ul class="ex-list">
+          <li><span class="ex-name">Romanian Deadlift con mancuernas</span><span class="ex-sets">4 × 12 · Cadena posterior</span></li>
+          <li><span class="ex-name">Sumo Squat (tempo 3-1-1)</span><span class="ex-sets">4 × 15 · Glúteo y aductor</span></li>
+          <li><span class="ex-name">Hip Thrust unilateral con banda</span><span class="ex-sets">3 × 15 c/lado · Glúteo mayor</span></li>
+          <li><span class="ex-name">Step-up lateral con mancuerna</span><span class="ex-sets">3 × 12 · Estabilidad</span></li>
+          <li><span class="ex-name">Dead Bug</span><span class="ex-sets">3 × 10 lentos · Core profundo</span></li>
+          <li><span class="ex-name">Pallof Press con banda</span><span class="ex-sets">3 × 12 · Anti-rotación</span></li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">M</div>
+        <div class="day-tag">Martes · Día 2</div>
+        <h3>Espalda media + Postura</h3>
+        <p class="day-focus">Activar romboides y trapecio medio abre el pecho, alarga el cuello visualmente y mejora la postura desde la raíz.</p>
+        <ul class="ex-list">
+          <li><span class="ex-name">Remo en pronación (codos abiertos)</span><span class="ex-sets">4 × 15 · Romboides</span></li>
+          <li><span class="ex-name">Face Pull con banda</span><span class="ex-sets">4 × 20 · Trapecio medio</span></li>
+          <li><span class="ex-name">Pull-apart con banda</span><span class="ex-sets">3 × 20 · Retracción escapular</span></li>
+          <li><span class="ex-name">Remo 1 brazo apoyado</span><span class="ex-sets">3 × 15 · Dorsal</span></li>
+          <li><span class="ex-name">Superman en suelo</span><span class="ex-sets">3 × 12 · Erector espinal</span></li>
+          <li><span class="ex-name">Apertura de pecho con banda</span><span class="ex-sets">2 × 30 seg · Liberación pectoral</span></li>
+        </ul>
+      </div>
+
+      <div class="day-card cardio">
+        <div class="day-number">X</div>
+        <div class="day-tag">Miércoles · Cardio</div>
+        <h3>Cardio + Sauna</h3>
+        <p class="day-focus">LISS o HIIT moderado. El sauna reduce el cortisol hasta un 23% post-ejercicio — parte del protocolo, no un lujo.</p>
+        <ul class="ex-list">
+          <li><span class="ex-name">Opción A: Elíptica o bici Zona 2</span><span class="ex-sets">35–40 min LISS</span></li>
+          <li><span class="ex-name">Opción B: HIIT</span><span class="ex-sets">30s/90s × 8–10 series</span></li>
+          <li><span class="ex-name">Sauna seco post-cardio</span><span class="ex-sets">15–20 min</span></li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">J</div>
+        <div class="day-tag">Jueves · Día 3</div>
+        <h3>Tren inferior · Énfasis glúteo</h3>
+        <p class="day-focus">Segunda sesión de piernas. Crear volumen abajo redistribuye visualmente la proporción del cuerpo.</p>
+        <ul class="ex-list">
+          <li><span class="ex-name">Bulgarian Split Squat</span><span class="ex-sets">4 × 10 · Cuádriceps y glúteo</span></li>
+          <li><span class="ex-name">Good Morning con banda</span><span class="ex-sets">3 × 15 · Isquio y glúteo</span></li>
+          <li><span class="ex-name">Abducción lateral de cadera</span><span class="ex-sets">3 × 20 · Glúteo medio</span></li>
+          <li><span class="ex-name">Zancada reverse con mancuerna</span><span class="ex-sets">3 × 12 · Equilibrio</span></li>
+          <li><span class="ex-name">Plancha lateral + apertura cadera</span><span class="ex-sets">3 × 10 · Oblicuos</span></li>
+          <li><span class="ex-name">Bird-Dog</span><span class="ex-sets">3 × 10 lentos · Lumbar</span></li>
+        </ul>
+      </div>
+
+      <div class="day-card">
+        <div class="day-number">V</div>
+        <div class="day-tag">Viernes · Día 4</div>
+        <h3>Hombros + Brazos estilizantes</h3>
+        <p class="day-focus">No buscamos volumen. Buscamos definición en deltoides posterior y lateral — hombros estrechos, cuello largo.</p>
+        <ul class="ex-list">
+          <li><span class="ex-name">Elevación lateral inclinada 30°</span><span class="ex-sets">4 × 20 carga baja · Deltoides</span></li>
+          <li><span class="ex-name">Vuelos posteriores (pájaro)</span><span class="ex-sets">4 × 20 · Deltoides posterior</span></li>
+          <li><span class="ex-name">Press Arnold muy ligero</span><span class="ex-sets">3 × 18 · Cabeza anterior/media</span></li>
+          <li><span class="ex-name">Curl martillo con banda</span><span class="ex-sets">3 × 15 · Bíceps braquial</span></li>
+          <li><span class="ex-name">Extensión tríceps sobre cabeza</span><span class="ex-sets">3 × 15 · Cabeza larga</span></li>
+          <li><span class="ex-name">Remo al mentón agarre ancho</span><span class="ex-sets">3 × 15 · Deltoides lateral</span></li>
+        </ul>
+      </div>
+
+      <div class="day-card cardio">
+        <div class="day-number">S</div>
+        <div class="day-tag">Sábado · Cardio</div>
+        <h3>Cardio + Sauna</h3>
+        <p class="day-focus">Varía el tipo respecto al miércoles. El sauna post-cardio tiene beneficio adicional en síntesis proteica.</p>
+        <ul class="ex-list">
+          <li><span class="ex-name">Cardio alternado (si LISS → HIIT)</span><span class="ex-sets">Adaptación al estímulo</span></li>
+          <li><span class="ex-name">Sauna seco</span><span class="ex-sets">15–20 min · hidratación previa</span></li>
+        </ul>
+      </div>
+
+      <div class="day-card rest-day">
+        <div class="day-number">D</div>
+        <div class="day-tag">Domingo · Descanso activo</div>
+        <h3>El músculo crece en el descanso, no durante el entrenamiento</h3>
+        <p class="day-focus">Caminata de 30–45 min, yoga suave o movilidad. Obligatorio.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- POSTURA -->
+<div class="posture-section">
+  <div class="posture-inner">
+    <div class="section-label">Protocolo postural</div>
+    <h2>Trapecios tensos.<br><em>Postura destruida.</em></h2>
+    <p class="lead">Esto no se corrige con estiramientos ocasionales. Necesita estrategia: liberar lo hipertónico, activar lo inhibido.</p>
+    <div class="posture-cols">
+      <div class="posture-col">
+        <h3>🔴 Lo que necesitas soltar</h3>
+        <div class="posture-item">
+          <h4>Trapecio superior — 2 min diarios</h4>
+          <p>Inclina la cabeza llevando la oreja al hombro. Mano contraria en la sien, sin tirar. Respira profundo. Sentada, con el peso de los brazos hacia abajo.</p>
+        </div>
+        <div class="posture-item">
+          <h4>Pectoral menor — contra la pared</h4>
+          <p>Antebrazo en el marco de una puerta, codo a 90°. Gira el cuerpo hasta sentir apertura en el pecho. 30 seg × 3 cada lado. Indispensable post-lactancia.</p>
+        </div>
+        <div class="posture-item">
+          <h4>Escalenos y esternocleidomastoideo</h4>
+          <p>Gira la cabeza 45° y lleva la barbilla ligeramente hacia arriba. 20 seg cada lado. Mejora la tensión cervical directamente.</p>
+        </div>
+        <div class="posture-item">
+          <h4>Foam roller en dorsal media</h4>
+          <p>2 min rodando la zona entre escápulas antes de entrenar. Si no tienes rodillo, usa una pelota de tenis contra la pared.</p>
+        </div>
+      </div>
+      <div class="posture-col">
+        <h3>🟢 Lo que necesitas activar</h3>
+        <div class="posture-item">
+          <h4>Trapecio medio e inferior — Face Pull diario</h4>
+          <p>El ejercicio más importante para tu situación. Con banda en altura media, tira hacia la cara con codos altos y separados. 3 × 20 cada día sin excepción.</p>
+        </div>
+        <div class="posture-item">
+          <h4>Romboides — Pull-apart con banda</h4>
+          <p>Sujeta la banda con ambas manos al frente, brazos extendidos. Abre los brazos hacia los lados. Enfócate en juntar las escápulas. Lento y consciente.</p>
+        </div>
+        <div class="posture-item">
+          <h4>Serratos — Push-up plus</h4>
+          <p>En posición de plancha, empuja el suelo y separa las escápulas al máximo. Activa el serrato anterior, que ancla la escápula y corrige el hombro adelantado.</p>
+        </div>
+        <div class="posture-item">
+          <h4>Core transverso — Respiración 360°</h4>
+          <p>Inhala expandiendo las costillas hacia los lados (no el pecho). Al exhalar, mete el ombligo suavemente hacia dentro. 5 min antes de cada entrenamiento.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARDIO Y SAUNA -->
+<div class="section">
+  <div class="section-label">Cardio + Sauna</div>
+  <h2>El dúo que<br><em>acelera</em> todo</h2>
+  <div class="cardio-block">
+    <h3>Por qué el sauna seco es parte del protocolo</h3>
+    <p>Estudios de la Universidad de Eastern Finland muestran que sesiones regulares de sauna (15–20 min a 80–90°C) reducen el cortisol hasta un 23% post-ejercicio. Para tu perfil — grasa en parte superior vinculada al cortisol elevado — esto no es un lujo, es parte del protocolo.</p>
+    <p>Además el sauna aumenta la hormona de crecimiento (GH) temporalmente, favoreciendo la lipolisis y la síntesis proteica.</p>
+    <div class="cardio-items">
+      <div class="cardio-item">
+        <h4>LISS — Cardio de baja intensidad</h4>
+        <p>35–45 min al 60–65% FC máxima. Puedes mantener una conversación. Elíptica, bici, caminata inclinada. Quema grasa sin elevar cortisol.</p>
+      </div>
+      <div class="cardio-item">
+        <h4>HIIT — Intervalos</h4>
+        <p>20 min total. 30 seg intenso / 90 seg suave. Máximo 2 veces por semana — más sube el cortisol. Bicicleta o cinta.</p>
+      </div>
+      <div class="cardio-item">
+        <h4>Sauna: cuándo y cómo</h4>
+        <p>Post-cardio, nunca post-fuerza si entrenas duro. 15–20 min. Sal, bebe agua y espera 5 min antes de ducharte fría para maximizar el efecto.</p>
+      </div>
+      <div class="cardio-item">
+        <h4>Lo que NO hacer</h4>
+        <p>Evita más de 2 HIIT por semana. Nunca cardio intenso en ayunas. Nunca sauna con fiebre o en período menstrual intenso.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPLEMENTOS -->
+<div class="section" style="padding-top:0;">
+  <div class="section-label">Suplementación</div>
+  <h2>Lo que realmente<br><em>funciona</em></h2>
+  <p class="lead">Sin humo. Solo lo que tiene evidencia para tu situación específica, ordenado por prioridad real.</p>
+  <div class="supp-grid">
+    <div class="supp-card">
+      <span class="supp-priority high">Prioridad alta</span>
+      <h3>Proteína en polvo</h3>
+      <div class="supp-dose">20–25g post entrenamiento</div>
+      <p>Indispensable si no alcanzas 1.6–2g/kg de peso. Whey isolate si toleras el lácteo, vegana de guisante + arroz si no. Lo importante es la proteína total diaria.</p>
+    </div>
+    <div class="supp-card">
+      <span class="supp-priority high">Prioridad alta</span>
+      <h3>Colágeno hidrolizado</h3>
+      <div class="supp-dose">10g en ayunas con vitamina C</div>
+      <p>Especialmente relevante postparto y lactancia. Beneficia tendones, piel y articulaciones. Tómalo 30–60 min antes de entrenar para máximo efecto en tejido conectivo.</p>
+    </div>
+    <div class="supp-card">
+      <span class="supp-priority high">Prioridad alta</span>
+      <h3>Vitamina D3 + K2</h3>
+      <div class="supp-dose">2000–4000 UI D3 + 100mcg K2</div>
+      <p>El postparto suele dejar niveles bajos. Influye en regulación hormonal (cortisol y estrógeno), función muscular y estado de ánimo. La K2 dirige el calcio al hueso.</p>
+    </div>
+    <div class="supp-card">
+      <span class="supp-priority med">Recomendado</span>
+      <h3>Magnesio glicinato</h3>
+      <div class="supp-dose">300–400mg antes de dormir</div>
+      <p>Reduce el cortisol nocturno, mejora el sueño y la tensión muscular. Perfecto para tus trapecios. El sueño es cuando tu cuerpo se regenera — no lo subestimes.</p>
+    </div>
+    <div class="supp-card">
+      <span class="supp-priority med">Recomendado</span>
+      <h3>Omega-3 EPA + DHA</h3>
+      <div class="supp-dose">2–3g EPA+DHA al día con comida</div>
+      <p>Antiinflamatorio sistémico con evidencia sólida. Reduce inflamación muscular, mejora sensibilidad a la insulina y contribuye a un perfil hormonal más equilibrado postparto.</p>
+    </div>
+    <div class="supp-card">
+      <span class="supp-priority opt">Opcional</span>
+      <h3>Creatina monohidrato</h3>
+      <div class="supp-dose">3–5g diarios sin carga</div>
+      <p>No te hace retener agua visible en dosis moderada. Evidencia en rendimiento, fuerza y función cognitiva. Para tu fase actual (estilizar) es opcional pero no contraproducente.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESIÓN -->
+<div class="timeline-section">
+  <div class="timeline-inner">
+    <div class="section-label">Roadmap</div>
+    <h2>Cómo evoluciona<br><em>el programa</em></h2>
+    <p class="lead">No es una rutina estática. Progresa en fases para que tu cuerpo nunca se adapte.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-phase"><span>1–4</span><small>semanas</small></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Fase 1 — Activación y postura</h4>
+          <p>Aprende los patrones de movimiento. Foco en activación del core, retracción escapular y movilidad de cadera. Cargas moderadas, técnica perfecta. La postura mejora en 2–3 semanas.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase"><span>5–8</span><small>semanas</small></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Fase 2 — Progresión de carga</h4>
+          <p>Aumenta el peso en tren inferior un 10% cada dos semanas. Mantén el rango alto de repeticiones en parte superior. Añade tempo lento (3-1-1) en glúteo para mayor activación.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-phase"><span>9–12</span><small>semanas</small></div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <h4>Fase 3 — Definición y silueta</h4>
+          <p>Introduce superseries en brazos y hombros. Aumenta el volumen de cardio LISS a 45–50 min. Tu cuerpo ya tiene la base muscular para responder con definición visible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>"El objetivo no es llegar a ser otra persona.<br>Es volver a <em>reconocerte</em>."</p>
+  <small>Programa diseñado para postparto · Mancuernas + Bandas + Sauna</small>
+</footer>
+
+</body>
+</html>
